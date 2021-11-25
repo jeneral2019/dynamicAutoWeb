@@ -31,6 +31,11 @@ public class TestDemo {
 
     }
 
+    @Test
+    public void waitTimeTest(){
+        driver.setWaitTime(10L).get("https://mail.163.com/");
+    }
+
     @AfterClass
     public void quitDriver(){
         driver.quit();

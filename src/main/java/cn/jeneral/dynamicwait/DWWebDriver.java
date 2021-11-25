@@ -1,12 +1,10 @@
 package cn.jeneral.dynamicwait;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +15,14 @@ import java.util.Set;
  */
 public class DWWebDriver {
 
-    protected static final String CHROME_DRIVER_PATH_KEY = "webdriver.chrome.driver";
-    protected static final String FIREFOX_DRIVER_PATH_KEY = "webdriver.gecko.driver";
-
     protected static Long waitTimeDefault = 20L;
     protected Long waitTime;
 
     protected WebDriver driver;
 
     protected DWWebDriver(){}
+
+    protected DWWebDriver(Long waitTime){}
 
     public DWWebDriver(WebDriver driver){
         this.driver = driver;
@@ -45,6 +42,10 @@ public class DWWebDriver {
     public DWWebDriver(WebElement webElement, Long waitTime){
         this.driver = ((RemoteWebElement) webElement).getWrappedDriver();
         this.waitTime = waitTime;
+    }
+    public DWWebDriver setWaitTime(Long time){
+        this.waitTime = time;
+        return this;
     }
 
     public void get(String url){

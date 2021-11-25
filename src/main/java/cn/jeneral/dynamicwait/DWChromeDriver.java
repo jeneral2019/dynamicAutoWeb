@@ -9,13 +9,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class DWChromeDriver extends DWWebDriver{
 
     public DWChromeDriver(){
-        if (System.getProperty(CHROME_DRIVER_PATH_KEY) == null){
-            WebDriverManager driverManager = WebDriverManager.chromedriver();
-            driverManager.useMirror();
-            driverManager.setup();
-        }
-        this.driver = new ChromeDriver();
         this.waitTime = waitTimeDefault;
+        this.driver = getChromeDriver();
+    }
+
+    protected DWChromeDriver(Long time){
+        this.waitTime = time;
+        this.driver = getChromeDriver();
+    }
+
+    private ChromeDriver getChromeDriver(){
+        WebDriverManager driverManager = WebDriverManager.chromedriver();
+
+        driverManager.useMirror();
+        driverManager.setup();
+
+        return (ChromeDriver) driverManager.create();
     }
 
 }
